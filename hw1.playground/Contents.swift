@@ -23,11 +23,12 @@ class Words {
 
 
 //: [EXPLAIN YOUR ANSWER HERE]
+    //:They are not the same type. The values passed in to the **init** function is an optional type but the instance variable is String type.
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(_ words: [String]) -> Bool {
-        let reversedWords = words.map() {String($0.characters.reversed())}
+    class func arePalindromes(words: [String]) -> Bool {
+        let reversedWords = words.map(){String($0.characters.reverse())}
         let numElements = words.count
         
         for i in 0 ..< numElements {
@@ -35,6 +36,7 @@ class Words {
                 return false
             }
         }
+        return true
     }
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
@@ -42,13 +44,15 @@ class Words {
 
 
 //: [EXPLAIN YOUR ANSWER HERE]
+    //: The function should be a class method instead of an instance method. Also in my version of swift, the .reversed() function doesn't exist for $0.characters.
+    //: The function should return a boolean value true at the end.
 
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
-        var lenA = self.wordA.characters.count
-        var lenB = self.wordB.characters.count
+   func isAnagram() -> Bool {
+        var countLetters = [Character : Int] ()//Line X
+        let lenA = self.wordA.characters.count
+        let lenB = self.wordB.characters.count
         
         if lenA != lenB {
             return false
@@ -75,13 +79,13 @@ class Words {
             }
         }
         
-        for (letter, count) in countLetters {
+        for (_, count) in countLetters {
             if count != 0 {
                 return false
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -90,6 +94,10 @@ class Words {
 
 
 //: [EXPLAIN YOUR ANSWER HERE]
+    //: Instance variable cannot be used in a class function so we have to change the class method to an instance method.
+    //: Change the lenA, lenB from variable to constant since they are never mutated.
+    //: The way of declaring countletters as dictionary is incorrect, we should change it to as above.
+    //: Change the letter to _ since it is never used.
     
     
 }
